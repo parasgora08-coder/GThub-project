@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Book</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>📒 Contact Book</h1>
+
+        <!-- Add Contact Form -->
+        <div class="form-box">
+
+            <h2>Add New Contact</h2>
+
+            <form action="/add" method="POST">
+
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Enter Name"
+                    required
+                >
+
+                <input
+                    type="text"
+                    name="phone"
+                    placeholder="Enter Phone Number"
+                    required
+                >
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter Email"
+                >
+
+                <input
+                    type="text"
+                    name="address"
+                    placeholder="Enter Address"
+                >
+
+                <button type="submit">
+                    Add Contact
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- Search -->
+        <div class="search-box">
+
+            <h2>Search Contact</h2>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search by name, phone or email..."
+                onkeyup="searchContacts()"
+            >
+
+        </div>
+
+
+        <!-- Contact List -->
+        <div class="contacts">
+
+            <h2>Contact List</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="contactTable">
+
+                    {% for contact in contacts %}
+
+                    <tr>
+
+                        <td>{{ contact.id }}</td>
+
+                        <td>{{ contact.name }}</td>
+
+                        <td>{{ contact.phone }}</td>
+
+                        <td>{{ contact.email }}</td>
+
+                        <td>{{ contact.address }}</td>
+
+                        <td>
+                            <a
+                                href="/delete/{{ contact.id }}"
+                                class="delete-btn"
+                                onclick="return confirm('Delete this contact?')"
+                            >
+                                Delete
+                            </a>
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='cript.js') }}"></script>
+</body>
+
+</html>
