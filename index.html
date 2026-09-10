@@ -22,14 +22,20 @@
                 <input
                     type="text"
                     name="name"
-                    placeholder="Enter Name"
+                    placeholder="Enter Full Name"
                     required
                 >
 
                 <input
                     type="text"
+                    name="nickname"
+                    placeholder="Enter Nickname/Alias (Optional)"
+                >
+
+                <input
+                    type="text"
                     name="phone"
-                    placeholder="Enter Phone Number"
+                    placeholder="Enter Primary Phone Number"
                     required
                 >
 
@@ -41,15 +47,21 @@
                 </select>
 
                 <input
+                    type="text"
+                    name="alternate_phone"
+                    placeholder="Enter Alternate Phone Number (Optional)"
+                >
+
+                <input
                     type="email"
                     name="email"
-                    placeholder="Enter Email"
+                    placeholder="Enter Email Address"
                 >
 
                 <input
                     type="text"
                     name="address"
-                    placeholder="Enter Address"
+                    placeholder="Enter Street Address"
                 >
 
                 <input
@@ -72,9 +84,41 @@
 
                 <input
                     type="text"
+                    name="department"
+                    placeholder="Enter Department"
+                >
+
+                <input
+                    type="text"
                     name="job_title"
                     placeholder="Enter Job Title"
                 >
+
+                <input
+                    type="date"
+                    name="birth_date"
+                    placeholder="Enter Birth Date"
+                >
+
+                <input
+                    type="url"
+                    name="website"
+                    placeholder="Enter Website URL"
+                >
+
+                <input
+                    type="url"
+                    name="linkedin"
+                    placeholder="Enter LinkedIn Profile URL"
+                >
+
+                <select name="preferred_contact">
+                    <option value="Phone">Phone</option>
+                    <option value="Email">Email</option>
+                    <option value="LinkedIn">LinkedIn</option>
+                    <option value="Text">Text Message</option>
+                    <option value="Other">Other</option>
+                </select>
 
                 <select name="category">
                     <option value="">Select Category</option>
@@ -85,6 +129,12 @@
                     <option value="Business">Business</option>
                     <option value="Other">Other</option>
                 </select>
+
+                <textarea
+                    name="notes"
+                    placeholder="Enter Additional Notes (Optional)"
+                    rows="3"
+                ></textarea>
 
                 <button type="submit">
                     Add Contact
@@ -103,7 +153,7 @@
             <input
                 type="text"
                 id="searchInput"
-                placeholder="Search by name, phone, email, city, company, job title, category..."
+                placeholder="Search by name, nickname, phone, email, company, department, website, LinkedIn..."
                 onkeyup="searchContacts()"
             >
 
@@ -122,14 +172,22 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
+                        <th>Nickname</th>
                         <th>Phone</th>
                         <th>Type</th>
+                        <th>Alt Phone</th>
                         <th>Email</th>
                         <th>City</th>
                         <th>Country</th>
                         <th>Company</th>
+                        <th>Department</th>
                         <th>Job Title</th>
+                        <th>Birth Date</th>
+                        <th>Website</th>
+                        <th>LinkedIn</th>
+                        <th>Preferred Contact</th>
                         <th>Category</th>
+                        <th>Notes</th>
                         <th>Action</th>
                     </tr>
 
@@ -145,9 +203,13 @@
 
                         <td>{{ contact.name }}</td>
 
+                        <td>{{ contact.nickname or "" }}</td>
+
                         <td>{{ contact.phone }}</td>
 
                         <td>{{ contact.phone_type or 'Mobile' }}</td>
+
+                        <td>{{ contact.alternate_phone or "" }}</td>
 
                         <td>{{ contact.email or "" }}</td>
 
@@ -157,9 +219,21 @@
 
                         <td>{{ contact.company or "" }}</td>
 
+                        <td>{{ contact.department or "" }}</td>
+
                         <td>{{ contact.job_title or "" }}</td>
 
+                        <td>{{ contact.birth_date or "" }}</td>
+
+                        <td><a href="{{ contact.website }}" target="_blank">{{ contact.website or "" }}</a></td>
+
+                        <td><a href="{{ contact.linkedin }}" target="_blank">{{ contact.linkedin or "" }}</a></td>
+
+                        <td>{{ contact.preferred_contact or 'Phone' }}</td>
+
                         <td>{{ contact.category or "" }}</td>
+
+                        <td>{{ contact.notes or "" }}</td>
 
                         <td>
                             <a
