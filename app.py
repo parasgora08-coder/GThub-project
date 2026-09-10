@@ -24,8 +24,14 @@ def initialize_database():
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL,
                 phone TEXT NOT NULL,
+                phone_type TEXT DEFAULT 'Mobile',
                 email TEXT NOT NULL DEFAULT '',
-                address TEXT NOT NULL DEFAULT ''
+                address TEXT NOT NULL DEFAULT '',
+                city TEXT DEFAULT '',
+                country TEXT DEFAULT '',
+                company TEXT DEFAULT '',
+                job_title TEXT DEFAULT '',
+                category TEXT DEFAULT ''
             )
             """
         )
@@ -35,7 +41,7 @@ def initialize_database():
 def index():
     with get_connection() as connection:
         contacts = connection.execute(
-            "SELECT id, name, phone, email, address FROM contacts ORDER BY name COLLATE NOCASE"
+            "SELECT id, name, phone, phone_type, email, address, city, country, company, job_title, category FROM contacts ORDER BY name COLLATE NOCASE"
         ).fetchall()
     return render_template("index.html", contacts=contacts)
 
@@ -44,14 +50,20 @@ def index():
 def add_contact():
     name = request.form.get("name", "").strip()
     phone = request.form.get("phone", "").strip()
+    phone_type = request.form.get("phone_type", "Mobile").strip()
     email = request.form.get("email", "").strip()
     address = request.form.get("address", "").strip()
+    city = request.form.get("city", "").strip()
+    country = request.form.get("country", "").strip()
+    company = request.form.get("company", "").strip()
+    job_title = request.form.get("job_title", "").strip()
+    category = request.form.get("category", "").strip()
 
     if name and phone:
         with get_connection() as connection:
             connection.execute(
-                "INSERT INTO contacts (name, phone, email, address) VALUES (?, ?, ?, ?)",
-                (name, phone, email, address),
+                "INSERT INTO contacts (name, phone, phone_type, email, address, city, country, company, job_title, category) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                (name, phone, phone_type, email, address, city, country, company, job_title, category),
             )
     return redirect(url_for("index"))
 
@@ -63,11 +75,12 @@ def search_contacts():
     with get_connection() as connection:
         contacts = connection.execute(
             """
-            SELECT id, name, phone, email, address FROM contacts
-            WHERE name LIKE ? OR phone LIKE ? OR email LIKE ? OR address LIKE ?
+            SELECT id, name, phone, phone_type, email, address, city, country, company, job_title, category FROM contacts
+            WHERE name LIKE ? OR phone LIKE ? OR email LIKE ? OR address LIKE ? 
+                OR city LIKE ? OR country LIKE ? OR company LIKE ? OR job_title LIKE ? OR category LIKE ?
             ORDER BY name COLLATE NOCASE
             """,
-            (pattern, pattern, pattern, pattern),
+            (pattern, pattern, pattern, pattern, pattern, pattern, pattern, pattern, pattern),
         ).fetchall()
     return jsonify([dict(contact) for contact in contacts])
 

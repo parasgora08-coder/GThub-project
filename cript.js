@@ -17,8 +17,13 @@ function searchContacts() {
                         <td>${contact.id}</td>
                         <td>${contact.name}</td>
                         <td>${contact.phone}</td>
+                        <td>${contact.phone_type || 'Mobile'}</td>
                         <td>${contact.email || ""}</td>
-                        <td>${contact.address || ""}</td>
+                        <td>${contact.city || ""}</td>
+                        <td>${contact.country || ""}</td>
+                        <td>${contact.company || ""}</td>
+                        <td>${contact.job_title || ""}</td>
+                        <td>${contact.category || ""}</td>
                         <td>
                             <a
                                 href="/delete/${contact.id}"

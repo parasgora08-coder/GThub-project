@@ -33,6 +33,13 @@
                     required
                 >
 
+                <select name="phone_type">
+                    <option value="Mobile">Mobile</option>
+                    <option value="Home">Home</option>
+                    <option value="Work">Work</option>
+                    <option value="Other">Other</option>
+                </select>
+
                 <input
                     type="email"
                     name="email"
@@ -44,6 +51,40 @@
                     name="address"
                     placeholder="Enter Address"
                 >
+
+                <input
+                    type="text"
+                    name="city"
+                    placeholder="Enter City"
+                >
+
+                <input
+                    type="text"
+                    name="country"
+                    placeholder="Enter Country"
+                >
+
+                <input
+                    type="text"
+                    name="company"
+                    placeholder="Enter Company/Organization"
+                >
+
+                <input
+                    type="text"
+                    name="job_title"
+                    placeholder="Enter Job Title"
+                >
+
+                <select name="category">
+                    <option value="">Select Category</option>
+                    <option value="Friend">Friend</option>
+                    <option value="Family">Family</option>
+                    <option value="Work">Work</option>
+                    <option value="Colleague">Colleague</option>
+                    <option value="Business">Business</option>
+                    <option value="Other">Other</option>
+                </select>
 
                 <button type="submit">
                     Add Contact
@@ -62,7 +103,7 @@
             <input
                 type="text"
                 id="searchInput"
-                placeholder="Search by name, phone or email..."
+                placeholder="Search by name, phone, email, city, company, job title, category..."
                 onkeyup="searchContacts()"
             >
 
@@ -82,8 +123,13 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Phone</th>
+                        <th>Type</th>
                         <th>Email</th>
-                        <th>Address</th>
+                        <th>City</th>
+                        <th>Country</th>
+                        <th>Company</th>
+                        <th>Job Title</th>
+                        <th>Category</th>
                         <th>Action</th>
                     </tr>
 
@@ -98,6 +144,40 @@
                         <td>{{ contact.id }}</td>
 
                         <td>{{ contact.name }}</td>
+
+                        <td>{{ contact.phone }}</td>
+
+                        <td>{{ contact.phone_type or 'Mobile' }}</td>
+
+                        <td>{{ contact.email or "" }}</td>
+
+                        <td>{{ contact.city or "" }}</td>
+
+                        <td>{{ contact.country or "" }}</td>
+
+                        <td>{{ contact.company or "" }}</td>
+
+                        <td>{{ contact.job_title or "" }}</td>
+
+                        <td>{{ contact.category or "" }}</td>
+
+                        <td>
+                            <a
+                                href="/delete/{{ contact.id }}"
+                                class="delete-btn"
+                                onclick="return confirm('Delete this contact?')"
+                            >
+                                Delete
+                            </a>
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
 
                         <td>{{ contact.phone }}</td>
 
