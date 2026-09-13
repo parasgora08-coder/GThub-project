@@ -6,15 +6,60 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 25%, #7e22ce 75%, #c084fc 100%);
+    background-attachment: fixed;
     min-height: 100vh;
     padding: 20px 0;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Decorative background elements */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(126, 34, 206, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(42, 82, 152, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(192, 132, 252, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Animated background patterns */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background-image: 
+        repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255, 255, 255, 0.03) 10px, rgba(255, 255, 255, 0.03) 20px);
+    pointer-events: none;
+    animation: drift 20s linear infinite;
+    z-index: 0;
+}
+
+@keyframes drift {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(50px, 50px);
+    }
 }
 
 .container {
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
 h1 {
@@ -22,26 +67,33 @@ h1 {
     margin-bottom: 40px;
     color: white;
     font-size: 2.5em;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    font-weight: 700;
+    letter-spacing: 0.5px;
 }
 
 h2 {
     margin-bottom: 20px;
-    color: #333;
+    color: #1e3c72;
     font-size: 1.5em;
-    border-bottom: 2px solid #667eea;
+    border-bottom: 3px solid #7e22ce;
     padding-bottom: 10px;
+    font-weight: 600;
 }
 
 .form-box,
 .search-box,
 .contacts {
-    background: white;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
     padding: 30px;
     margin-bottom: 25px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    box-shadow: 
+        0 8px 32px rgba(31, 38, 135, 0.37),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.3);
     animation: slideUp 0.5s ease-out;
+    border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 @keyframes slideUp {
@@ -63,38 +115,57 @@ form {
 input {
     padding: 13px 16px;
     border: 2px solid #e0e0e0;
-    border-radius: 8px;
+    border-radius: 10px;
     font-size: 15px;
     transition: all 0.3s ease;
     font-family: inherit;
+    background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(248,249,255,0.8));
 }
 
 input:focus {
     outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    border-color: #7e22ce;
+    box-shadow: 0 0 0 3px rgba(126, 34, 206, 0.15);
+    background: white;
 }
 
 input::placeholder {
     color: #999;
 }
 
+select, textarea {
+    padding: 13px 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(248,249,255,0.8));
+}
+
+select:focus, textarea:focus {
+    outline: none;
+    border-color: #7e22ce;
+    box-shadow: 0 0 0 3px rgba(126, 34, 206, 0.15);
+    background: white;
+}
+
 button {
     padding: 13px 24px;
     border: none;
-    border-radius: 8px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+    background: linear-gradient(135deg, #7e22ce 0%, #9333ea 100%);
     color: white;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 4px 15px rgba(126, 34, 206, 0.4);
 }
 
 button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    box-shadow: 0 6px 20px rgba(126, 34, 206, 0.6);
 }
 
 button:active {
@@ -110,12 +181,12 @@ table {
 th,
 td {
     padding: 15px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid #e8e8f0;
     text-align: left;
 }
 
 th {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #7e22ce 0%, #9333ea 100%);
     color: white;
     font-weight: 600;
     text-align: center;
@@ -131,11 +202,11 @@ tbody tr {
 }
 
 tbody tr:hover {
-    background-color: #f8f9ff;
+    background-color: #f3e8ff;
 }
 
 tbody tr:nth-child(even) {
-    background-color: #f5f7fb;
+    background-color: #faf5ff;
 }
 
 .delete-btn {
@@ -159,6 +230,18 @@ tbody tr:nth-child(even) {
 
 .delete-btn:active {
     transform: scale(0.98);
+}
+
+/* Link styling */
+a {
+    color: #7e22ce;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: #9333ea;
+    text-decoration: underline;
 }
 
 /* Responsive Design */
