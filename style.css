@@ -107,6 +107,85 @@ h2 {
     }
 }
 
+/* Background Decoration Elements */
+.background-decoration {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.bg-icon {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    color: rgba(255, 255, 255, 0.15);
+    filter: drop-shadow(0 0 8px rgba(126, 34, 206, 0.2));
+}
+
+/* Icon positioning and animations */
+.icon-1 {
+    top: 5%;
+    left: 5%;
+    animation: float 6s ease-in-out infinite;
+}
+
+.icon-2 {
+    top: 15%;
+    right: 8%;
+    animation: float 8s ease-in-out infinite 1s;
+}
+
+.icon-3 {
+    top: 40%;
+    left: 3%;
+    animation: float 7s ease-in-out infinite 2s;
+}
+
+.icon-4 {
+    bottom: 20%;
+    right: 5%;
+    animation: float 9s ease-in-out infinite 0.5s;
+}
+
+.icon-5 {
+    bottom: 10%;
+    left: 10%;
+    animation: float 7.5s ease-in-out infinite 1.5s;
+}
+
+.icon-6 {
+    top: 60%;
+    right: 15%;
+    animation: float 8.5s ease-in-out infinite 0.8s;
+}
+
+.icon-7 {
+    top: 25%;
+    right: 25%;
+    animation: float 6.5s ease-in-out infinite 2.5s;
+}
+
+.icon-8 {
+    bottom: 30%;
+    left: 20%;
+    animation: float 7s ease-in-out infinite 1.2s;
+}
+
+/* Float animation */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(2deg);
+    }
+}
+
 form {
     display: grid;
     gap: 15px;
@@ -268,6 +347,22 @@ a:hover {
         padding: 10px 12px;
         font-size: 14px;
     }
+
+    /* Reduce background icon size and opacity on mobile */
+    .bg-icon {
+        width: 70px;
+        height: 70px;
+        color: rgba(255, 255, 255, 0.08);
+    }
+
+    .icon-1 { top: 10%; left: 2%; }
+    .icon-2 { top: 20%; right: 5%; }
+    .icon-3 { top: 45%; left: 1%; }
+    .icon-4 { bottom: 25%; right: 3%; }
+    .icon-5 { bottom: 15%; left: 8%; }
+    .icon-6 { top: 65%; right: 10%; }
+    .icon-7 { top: 30%; right: 20%; }
+    .icon-8 { bottom: 35%; left: 15%; }
 }
 
 /* Empty state message */
