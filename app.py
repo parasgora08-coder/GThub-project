@@ -44,6 +44,33 @@ def initialize_database():
             """
         )
 
+        existing_columns = {
+            column[1]
+            for column in connection.execute("PRAGMA table_info(contacts)").fetchall()
+        }
+        columns_to_add = {
+            "nickname": "TEXT DEFAULT ''",
+            "phone_type": "TEXT DEFAULT 'Mobile'",
+            "alternate_phone": "TEXT DEFAULT ''",
+            "address": "TEXT NOT NULL DEFAULT ''",
+            "city": "TEXT DEFAULT ''",
+            "country": "TEXT DEFAULT ''",
+            "company": "TEXT DEFAULT ''",
+            "department": "TEXT DEFAULT ''",
+            "job_title": "TEXT DEFAULT ''",
+            "category": "TEXT DEFAULT ''",
+            "birth_date": "TEXT DEFAULT ''",
+            "website": "TEXT DEFAULT ''",
+            "linkedin": "TEXT DEFAULT ''",
+            "preferred_contact": "TEXT DEFAULT 'Phone'",
+            "notes": "TEXT DEFAULT ''",
+        }
+        for column_name, column_definition in columns_to_add.items():
+            if column_name not in existing_columns:
+                connection.execute(
+                    f"ALTER TABLE contacts ADD COLUMN {column_name} {column_definition}"
+                )
+
 
 @app.route("/")
 def index():
