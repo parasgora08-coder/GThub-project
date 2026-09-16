@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Book</title>
+    <title>Contact Book | Your people, beautifully organized</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap">
 </head>
 
 <body>
@@ -76,12 +77,25 @@
     </div>
 
     <div class="container">
-        <h1>📒 Contact Book</h1>
+            <header class="site-header">
+                <div class="brand-mark" aria-hidden="true">CB</div>
+                <div>
+                    <p class="eyebrow">Personal directory</p>
+                    <h1>Contact Book</h1>
+                    <p class="subtitle">A calmer place for the people who matter.</p>
+                </div>
+            </header>
 
         <!-- Add Contact Form -->
         <div class="form-box">
 
-            <h2>Add New Contact</h2>
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">Keep your circle close</p>
+                        <h2>Add New Contact</h2>
+                    </div>
+                    <span class="required-note">Name and phone are required</span>
+                </div>
 
             <form action="/add" method="POST">
 
@@ -213,63 +227,44 @@
 
         <!-- Search -->
         <div class="search-box">
-
-            <h2>Search Contact</h2>
-
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Search by name, nickname, phone, email, company, department, website, LinkedIn..."
-                onkeyup="searchContacts()"
-            >
-
+            <div class="section-heading compact-heading">
+                <div>
+                    <p class="eyebrow">Find someone fast</p>
+                    <h2>Search contacts</h2>
+                </div>
+                <span class="search-hint">Live search</span>
+            </div>
+            <div class="search-field">
+                <span class="search-symbol" aria-hidden="true">⌕</span>
+                <input type="text" id="searchInput" placeholder="Search by name, phone, email, company or category..." onkeyup="searchContacts()">
+            </div>
         </div>
-
 
         <!-- Contact List -->
         <div class="contacts">
-
-            <h2>Contact List</h2>
-
-            <table>
-
-                <thead>
-
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Nickname</th>
-                        <th>Phone</th>
-                        <th>Type</th>
-                        <th>Alt Phone</th>
-                        <th>Email</th>
-                        <th>City</th>
-                        <th>Country</th>
-                        <th>Company</th>
-                        <th>Department</th>
-                        <th>Job Title</th>
-                        <th>Birth Date</th>
-                        <th>Website</th>
-                        <th>LinkedIn</th>
-                        <th>Preferred Contact</th>
-                        <th>Category</th>
-                        <th>Notes</th>
-                        <th>Action</th>
-                    </tr>
-
-                </thead>
-
-                <tbody id="contactTable">
-
-                    {% for contact in contacts %}
-
-                    <tr>
-
-                        <td>{{ contact.id }}</td>
-
-                        <td>{{ contact.name }}</td>
-
-                        <td>{{ contact.nickname or "" }}</td>
+            <div class="section-heading compact-heading">
+                <div>
+                    <p class="eyebrow">Your directory</p>
+                    <h2>Contact list</h2>
+                </div>
+                <span class="table-scroll-note">Scroll to explore details →</span>
+            </div>
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th><th>Name</th><th>Nickname</th><th>Phone</th><th>Type</th>
+                            <th>Alt Phone</th><th>Email</th><th>City</th><th>Country</th><th>Company</th>
+                            <th>Department</th><th>Job Title</th><th>Birth Date</th><th>Website</th>
+                            <th>LinkedIn</th><th>Preferred Contact</th><th>Category</th><th>Notes</th><th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="contactTable">
+                        {% for contact in contacts %}
+                        <tr>
+                            <td>{{ contact.id }}</td>
+                            <td>{{ contact.name }}</td>
+                            <td>{{ contact.nickname or "" }}</td>
 
                         <td>{{ contact.phone }}</td>
 
@@ -311,13 +306,11 @@
                             </a>
                         </td>
 
-                    </tr>
-
-                    {% endfor %}
-
-                </tbody>
-
-            </table>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
 
         </div>
 
